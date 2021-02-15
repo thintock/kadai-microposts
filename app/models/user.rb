@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   has_many :favorites
-  has_many :favorings, through: :favorites, source: :micropost
+  has_many :likes, through: :favorites, source: :micropost
 
   def favorite(other_micropost)
     self.favorites.find_or_create_by(micropost_id: other_micropost.id)
@@ -44,7 +44,7 @@ class User < ApplicationRecord
     favorite.destroy if favorite
   end
 
-  def favoring?(other_micropost)
-    self.favorings.include?(other_micropost)
+  def like?(other_micropost)
+    self.likes.include?(other_micropost)
   end
 end
